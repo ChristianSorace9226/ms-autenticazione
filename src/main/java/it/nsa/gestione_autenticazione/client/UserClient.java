@@ -1,22 +1,22 @@
 package it.nsa.gestione_autenticazione.client;
 
-import it.nsa.gestione_autenticazione.dto.UtenteDTO;
+import it.nsa.common.dto.UtenteDTO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "user-service", url = "http://localhost:8081") //todo:URL del microservizio da chiedere a Claudio
+@FeignClient(name = "user-service", url = "http://localhost:8085/feign")
 public interface UserClient {
 
-    @GetMapping("/api/users/exists") //todo: endpoint da chiedere a claudio
-    Boolean doesUserExistByEmail(@RequestParam("email") String email);
+    @GetMapping("/get-utente-dto")
+    public ResponseEntity<UtenteDTO> getUtenteDTO(@RequestParam String username);
+    @GetMapping("/get-user")
+    public ResponseEntity<UtenteDTO> getUserByEmail(@RequestParam("email") String email);
+    @GetMapping("/get-utente-dto-by-id/{idUtente}")
+    public ResponseEntity<UtenteDTO> getUtenteById(@PathVariable Long idUtente);
 
-    @GetMapping("/api/users/getUsername") //todo: endpoint da chiedere a claudio
-    String getUsernameByEmail(@RequestParam("email") String email);
-
-    @GetMapping("/users/{username}")
-    UtenteDTO getUserDetails(@PathVariable("username") String username);
 }
 
 

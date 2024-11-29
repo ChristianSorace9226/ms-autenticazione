@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface JwtRepository extends JpaRepository<Jwt, Long> {
     Optional<Jwt> findByToken(String token);
     void deleteByToken(String token);
+    Optional<Jwt> getJwtByIdUtente(Long idUtente);
 }

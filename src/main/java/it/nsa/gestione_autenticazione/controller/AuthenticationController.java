@@ -1,6 +1,7 @@
 package it.nsa.gestione_autenticazione.controller;
 
 import it.nsa.gestione_autenticazione.dto.request.RequestLoginDTO;
+import it.nsa.gestione_autenticazione.dto.response.ResponseLogoutDTO;
 import it.nsa.gestione_autenticazione.service.resource.AuthenticationResource;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -30,4 +31,10 @@ public class AuthenticationController {
     public ResponseEntity<?> logout(@RequestHeader String token) {
         return ResponseEntity.ok(authenticationResource.logout(token));
     }
+
+    @GetMapping("/status/{idUtente}")
+    public ResponseEntity<?> status(@PathVariable Long idUtente) {
+        return ResponseEntity.ok(authenticationResource.getStato(idUtente));
+    }
+
 }

@@ -22,7 +22,6 @@ public class JwtUtil {
         this.SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     }
 
-    // Crea un JWT token
     public String generateToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
@@ -32,12 +31,10 @@ public class JwtUtil {
                 .compact();
     }
 
-    // Estrae il nome utente dal token
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
-    // Estrae la data di scadenza dal token
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
@@ -48,7 +45,6 @@ public class JwtUtil {
         return claimsResolver.apply(claims);
     }
 
-    // Estrae tutti i claims dal token
     private Claims extractAllClaims(String token) {
         try {
             return Jwts.parserBuilder()
@@ -61,24 +57,13 @@ public class JwtUtil {
         }
     }
 
-    // Verifica se il token è scaduto
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 
-    // Valida il token controllando se il nome utente e la scadenza sono corretti
     public boolean validateToken(String token, String username) {
         return (username.equals(extractUsername(token)) && !isTokenExpired(token));
     }
 
-    // Estrae l'ID dell'utente dal JWT
-    public String getUserIdFromJwt(String token) {
-        Claims claims = Jwts.parserBuilder()
-                .setSigningKey(SECRET_KEY)
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-        return claims.getSubject(); //e qui l'id?
-    }
 
 }

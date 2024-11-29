@@ -2,12 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.4.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
+
     <groupId>it.nsa</groupId>
     <artifactId>gestione-autenticazione</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -26,10 +28,19 @@
         <tag/>
         <url/>
     </scm>
+
     <properties>
         <java.version>21</java.version>
+        <jjwt-api.version>0.11.0</jjwt-api.version>
+        <jjwt-impl.version>0.11.0</jjwt-impl.version>
+        <jjwt-orgjson.version>0.11.0</jjwt-orgjson.version>
+        <eventi-common.version>0.1</eventi-common.version>
+        <spring-cloud-dependencies.version>2023.0.0</spring-cloud-dependencies.version>
+        <spring-security-crypto.version>6.2.0</spring-security-crypto.version>
     </properties>
+
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -60,7 +71,6 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -74,25 +84,32 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-crypto</artifactId>
-            <version>6.2.0</version> <!-- Assicurati di usare una versione compatibile -->
+            <version>${spring-security-crypto.version}</version>
         </dependency>
 
         <!--JWT-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
-            <version>0.11.0</version>
+            <version>${jjwt-api.version}</version>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-impl</artifactId>
-            <version>0.11.0</version>
+            <version>${jjwt-impl.version}</version>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-orgjson</artifactId>
-            <version>0.11.0</version>
+            <version>${jjwt-orgjson.version}</version>
         </dependency>
+        <!--		Dipendenza per progetto common-->
+        <dependency>
+            <groupId>it.nsa</groupId>
+            <artifactId>eventi-common</artifactId>
+            <version>${eventi-common.version}</version>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
@@ -100,7 +117,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>2023.0.0</version>
+                <version>${spring-cloud-dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -123,6 +140,7 @@
             </plugin>
         </plugins>
     </build>
+
     <repositories>
         <repository>
             <id>spring-snapshots</id>
@@ -133,6 +151,7 @@
             </releases>
         </repository>
     </repositories>
+
     <pluginRepositories>
         <pluginRepository>
             <id>spring-snapshots</id>

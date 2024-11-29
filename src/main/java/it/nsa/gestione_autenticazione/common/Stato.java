@@ -7,7 +7,7 @@ public enum Stato {
     SUCCESS("success"),
     FAILED("failed"),
     UTENTE_AUTENTICATO("already authenticated"),
-    NO_AUTH("missing authentication");
+    NO_AUTENTCAZIONE("missing authentication");
 
     final String message;
 
